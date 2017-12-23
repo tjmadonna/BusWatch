@@ -1,0 +1,44 @@
+/*
+ * Copyright 2017 Tyler Madonna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.madonnaapps.buswatch.data.parse
+
+import org.junit.Assert
+import org.junit.Test
+import java.util.*
+
+class ParseStopTest {
+
+    val parseStops = Arrays.asList(
+            ParseStop(0, "Title 0", 0 * 20.0, 0 * 50.0),
+            ParseStop(1, "Title 1", 1 * 20.0, 1 * 50.0),
+            ParseStop(2, "Title 2", 2 * 20.0, 2 * 50.0))
+
+    @Test
+    fun toDatabaseStopListTest() {
+
+        val stops = ParseStop.listToDatabaseStops(parseStops);
+
+        for ((index, value) in stops.withIndex()) {
+            Assert.assertEquals(index.toLong(), value.code)
+            Assert.assertEquals("Title " + index, value.title)
+            Assert.assertEquals(index.toLong() * 20.0, value.latitude, 0.0000005)
+            Assert.assertEquals(index.toLong() * 50.0, value.longitude, 0.0000005)
+        }
+
+    }
+
+}
