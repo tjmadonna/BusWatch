@@ -19,12 +19,9 @@ package com.madonnaapps.buswatch.data.parse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.Reader
+import javax.inject.Inject
 
-class StopFileParser {
-
-    lateinit var gson: Gson
-
-    lateinit var reader: Reader
+internal class StopFileParser @Inject constructor(val gson: Gson, val reader: Reader) {
 
     fun parse(): List<ParseStop> {
 
