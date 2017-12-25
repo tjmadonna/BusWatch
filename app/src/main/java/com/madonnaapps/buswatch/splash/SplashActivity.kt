@@ -16,15 +16,38 @@
 
 package com.madonnaapps.buswatch.splash
 
+import android.arch.lifecycle.Observer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.madonnaapps.buswatch.R
+import android.util.Log
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
-class SplashActivity : AppCompatActivity() {
+internal class SplashActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+
+        viewModel.parseResult().observe(this, Observer { parseResult ->
+
+            if (parseResult != null) {
+
+                val error = parseResult.error
+
+                if (error != null) {
+                    Log.e("SplashActivity", error.message, error)
+                }
+
+                // Start activity
+
+            }
+
+        })
+
     }
 
 }

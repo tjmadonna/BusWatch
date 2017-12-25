@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.madonnaapps.buswatch.di
+package com.madonnaapps.buswatch.splash
 
-import com.madonnaapps.buswatch.splash.SplashActivity
-import com.madonnaapps.buswatch.splash.SplashActivityModule
+import android.arch.lifecycle.ViewModelProviders
+import com.madonnaapps.buswatch.di.ActivityScope
+import com.madonnaapps.buswatch.utils.BusWatchViewModelFactory
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
 
 @Module
-internal abstract class ActivityBuilderModule {
+internal class SplashActivityModule {
 
+    @Provides
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(SplashActivityModule::class))
-    abstract fun bindSplashActivity() : SplashActivity
+    fun provideSplashViewModel(activity: SplashActivity, viewModelFactory: BusWatchViewModelFactory) : SplashViewModel {
+        return ViewModelProviders
+                .of(activity, viewModelFactory)
+                .get(SplashViewModel::class.java)
+    }
 
 }
