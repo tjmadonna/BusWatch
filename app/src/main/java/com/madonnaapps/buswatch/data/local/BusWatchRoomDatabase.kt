@@ -16,21 +16,13 @@
 
 package com.madonnaapps.buswatch.data.local
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.RoomDatabase
 
-@Entity(tableName = "stops")
-internal data class Stop(
+@Database(entities = arrayOf(Stop::class), version = 1)
+internal abstract class BusWatchRoomDatabase : RoomDatabase() {
 
-        @PrimaryKey(autoGenerate = true) val id: Long,
+    // Stop dao instance
+    abstract fun stopDao(): StopDao
 
-        @ColumnInfo(name = "code") val code: Long,
-
-        @ColumnInfo(name = "title") val title: String,
-
-        @ColumnInfo(name = "latitude") val latitude: Double,
-
-        @ColumnInfo(name = "longitude") val longitude: Double
-
-)
+}

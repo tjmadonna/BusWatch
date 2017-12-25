@@ -22,7 +22,7 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 
 @Dao
-interface StopDao {
+internal interface StopDao {
 
     @Query("SELECT code title latitude longitude WHERE latitude <= :northBound " +
             "AND latitude >= :southBound AND longitude <= :eastBound AND longitude >= :westBound")
@@ -36,6 +36,6 @@ interface StopDao {
     fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(stops: List<Stop>) : Long
+    fun insert(stops: List<Stop>) : List<Long>
 
 }
