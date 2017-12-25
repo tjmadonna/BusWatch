@@ -19,7 +19,7 @@ package com.madonnaapps.buswatch.data.parse
 import com.google.gson.annotations.SerializedName
 import com.madonnaapps.buswatch.data.local.Stop
 
-data class ParseStop(
+internal data class ParseStop(
 
         @SerializedName("stop_code") val code: Long,
 
@@ -30,15 +30,10 @@ data class ParseStop(
         @SerializedName("stop_lon") val longitude: Double
 
 ) {
-    companion object {
 
-        fun listToDatabaseStops(parseStops: List<ParseStop>): List<Stop> {
+    fun toDatabaseStop() : Stop {
 
-            return parseStops.map {
-                Stop(it.code, it.code, it.title, it.latitude, it.longitude)
-            }
-
-        }
+        return Stop(this.code, this.code, this.title, this.latitude, this.longitude)
 
     }
 
