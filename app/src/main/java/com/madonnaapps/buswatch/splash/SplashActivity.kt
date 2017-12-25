@@ -20,6 +20,7 @@ import android.arch.lifecycle.Observer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.madonnaapps.buswatch.stops.StopsActivity
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -34,17 +35,22 @@ internal class SplashActivity : AppCompatActivity() {
 
         viewModel.parseResult().observe(this, Observer { parseResult ->
 
-            if (parseResult != null) {
-
-                val error = parseResult.error
-
-                if (error != null) {
-                    Log.e("SplashActivity", error.message, error)
-                }
-
-                // Start activity
-
+            // Make sure parse results isn't null. This shouldn't happen
+            if (parseResult == null) {
+                return@Observer
             }
+
+            // Log error if one exists
+            val error = parseResult.error
+
+            if (error != null) {
+                Log.e("SplashActivity", error.message, error)
+            }
+
+            // Start stops activity and finish this activity to prevent being in back stack
+            val intent = StopsActivity.createIntent(this)
+            startActivity(intent)
+            finish()
 
         })
 

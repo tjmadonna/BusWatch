@@ -16,6 +16,8 @@
 
 package com.madonnaapps.buswatch.stops
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
@@ -27,7 +29,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.madonnaapps.buswatch.R
 
-class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
+internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    companion object {
+        fun createIntent(context: Context) : Intent {
+            return Intent(context, StopsActivity::class.java)
+        }
+    }
 
     private lateinit var mMap: GoogleMap
 
