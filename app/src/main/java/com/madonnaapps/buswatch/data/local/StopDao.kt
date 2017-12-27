@@ -24,12 +24,12 @@ import android.arch.persistence.room.Query
 @Dao
 internal interface StopDao {
 
-    @Query("SELECT code title latitude longitude WHERE latitude <= :northBound " +
+    @Query("SELECT * FROM stops WHERE latitude <= :northBound " +
             "AND latitude >= :southBound AND longitude <= :eastBound AND longitude >= :westBound")
     fun getStopsInBounds(northBound: Double, southBound: Double,
                          eastBound: Double, westBound: Double ) : List<Stop>
 
-    @Query("SELECT code title latitude longitude WHERE code == :code")
+    @Query("SELECT * FROM stops WHERE code == :code")
     fun getStopByCode(code: Long) : Stop
 
     @Query("DELETE FROM stops")

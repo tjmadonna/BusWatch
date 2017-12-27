@@ -33,7 +33,7 @@ internal data class ParseStop(
 
     fun toDatabaseStop() : Stop {
 
-        return Stop(this.code, this.code, this.title, this.latitude, this.longitude)
+        return Stop(this.code, this.title, this.latitude, this.longitude)
 
     }
 

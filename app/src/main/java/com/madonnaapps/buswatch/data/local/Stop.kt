@@ -23,14 +23,13 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "stops")
 internal data class Stop(
 
-        @PrimaryKey(autoGenerate = true) val id: Long,
+        @PrimaryKey(autoGenerate = false)
+        @ColumnInfo(name = "code") var code: Long = 0,
 
-        @ColumnInfo(name = "code") val code: Long,
+        @ColumnInfo(name = "title") var title: String = "",
 
-        @ColumnInfo(name = "title") val title: String,
+        @ColumnInfo(name = "latitude") var latitude: Double = 0.0,
 
-        @ColumnInfo(name = "latitude") val latitude: Double,
-
-        @ColumnInfo(name = "longitude") val longitude: Double
+        @ColumnInfo(name = "longitude") var longitude: Double = 0.0
 
 )
