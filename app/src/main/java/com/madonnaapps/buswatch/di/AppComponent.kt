@@ -23,10 +23,11 @@ import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
 @AppScope
-@Component(modules = arrayOf(
+@Component(modules = [
         AndroidSupportInjectionModule::class,
+        ActivityBuilderModule::class,
         AppModule::class
-))
+])
 internal interface AppComponent {
 
     @Component.Builder
