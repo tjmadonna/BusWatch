@@ -19,6 +19,8 @@ package com.madonnaapps.buswatch.data.local
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 @Entity(tableName = "stops")
 internal data class Stop(
@@ -32,4 +34,11 @@ internal data class Stop(
 
         @ColumnInfo(name = "longitude") var longitude: Double = 0.0
 
-)
+) {
+
+    fun toGoogleMapsMarkerOptions(): MarkerOptions {
+        val latLng = LatLng(latitude, longitude)
+        return MarkerOptions().position(latLng).title(title).snippet(code.toString())
+    }
+
+}
