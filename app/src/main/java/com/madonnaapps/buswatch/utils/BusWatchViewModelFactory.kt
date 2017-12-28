@@ -20,15 +20,20 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.madonnaapps.buswatch.data.StopsRepository
 import com.madonnaapps.buswatch.splash.SplashViewModel
+import com.madonnaapps.buswatch.stops.StopsViewModel
 import javax.inject.Inject
 
-internal class BusWatchViewModelFactory @Inject constructor(val stopsRepository: StopsRepository) : ViewModelProvider.Factory {
+internal class BusWatchViewModelFactory @Inject constructor(private val stopsRepository: StopsRepository) : ViewModelProvider.Factory {
 
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
             return SplashViewModel(stopsRepository) as T
+        }
+
+        else if (modelClass.isAssignableFrom(StopsViewModel::class.java)) {
+            return StopsViewModel(stopsRepository) as T
         }
 
         else run { throw IllegalArgumentException("View model cannot be found") }
