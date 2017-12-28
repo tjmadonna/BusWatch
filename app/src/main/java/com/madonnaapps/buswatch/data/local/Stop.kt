@@ -38,7 +38,7 @@ internal data class Stop(
 
     fun toGoogleMapsMarkerOptions(): MarkerOptions {
         val latLng = LatLng(latitude, longitude)
-        return MarkerOptions().position(latLng).title(title).snippet(code.toString())
+        return MarkerOptions().position(latLng).title(title)
     }
 
 }
