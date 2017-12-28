@@ -47,7 +47,7 @@ android {
     // Import api keys from keystore.properties file
     def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()
-    keystoreProperties.load(new FileInputStream((keystorePropertiesFile)))
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
     buildTypes.each {
         it.buildConfigField 'String', 'TRUE_TIME_API_KEY', keystoreProperties['TrueTimeApiKey']
@@ -56,13 +56,13 @@ android {
     buildTypes {
 
         debug {
-            manifestPlaceholders = [GOOGLE_MAP_KEY:keystoreProperties['GoogleMapKeyDebug']]
+            resValue "string", "google_maps_api_key", keystoreProperties['GoogleMapKeyDebug']
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [GOOGLE_MAP_KEY:keystoreProperties['GoogleMapKeyRelease']]
+            resValue "string", "google_maps_api_key", keystoreProperties['GoogleMapKeyRelease']
         }
 
     }
