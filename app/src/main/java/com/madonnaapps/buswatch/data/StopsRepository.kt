@@ -44,6 +44,11 @@ internal class StopsRepository @Inject constructor(private val stopDao: StopDao,
         stopDao.deleteAll()
     }
 
+    fun getStopsInBounds(northBound: Double, southBound: Double,
+                         eastBound: Double, westBound: Double ) : List<Stop> {
+        return stopDao.getStopsInBounds(northBound, southBound, eastBound, westBound)
+    }
+
     // Shared preferences
 
     fun getStopFileVersion() : Int {
