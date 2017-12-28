@@ -18,6 +18,8 @@ package com.madonnaapps.buswatch.di
 
 import com.madonnaapps.buswatch.splash.SplashActivity
 import com.madonnaapps.buswatch.splash.SplashActivityModule
+import com.madonnaapps.buswatch.stops.StopsActivity
+import com.madonnaapps.buswatch.stops.StopsActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -25,7 +27,11 @@ import dagger.android.ContributesAndroidInjector
 internal abstract class ActivityBuilderModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(SplashActivityModule::class))
+    @ContributesAndroidInjector(modules = [SplashActivityModule::class])
     abstract fun bindSplashActivity() : SplashActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [StopsActivityModule::class])
+    abstract fun bindStopsActivity() : StopsActivity
 
 }
