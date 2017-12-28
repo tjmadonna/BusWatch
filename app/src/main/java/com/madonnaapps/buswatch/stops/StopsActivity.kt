@@ -16,53 +16,94 @@
 
 package com.madonnaapps.buswatch.stops
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import android.util.Log
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+
+import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
+import com.madonnaapps.buswatch.data.local.Stop
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
-        fun createIntent(context: Context) : Intent {
+        fun createIntent(context: Context): Intent {
             return Intent(context, StopsActivity::class.java)
         }
     }
 
-    private lateinit var mMap: GoogleMap
+    @Inject
+    lateinit var viewModel: StopsViewModel
+
+    private lateinit var googleMap: GoogleMap
+
+    private val markers = HashMap<Long, Marker>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stops)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+    // Map is ready
+    override fun onMapReady(map: GoogleMap) {
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        googleMap = map
+
+        val latLng = LatLng(40.4406, -79.9959)
+
+        val update = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f)
+
+        googleMap.moveCamera(update)
+
+        googleMap.setOnCameraIdleListener({
+
+            val bounds = googleMap.projection.visibleRegion.latLngBounds
+
+            val zoom = googleMap.cameraPosition.zoom
+
+            Log.d("StopsActivity", "View zoom is " + map.cameraPosition.zoom)
+
+            viewModel.loadStopsInBounds(bounds, zoom)
+
+        })
+
+        viewModel.stops().observe(this, Observer<List<Stop>> { stops ->
+
+            if (stops == null) {
+                markers.clear()
+                googleMap.clear()
+                return@Observer
+            }
+
+            stops.filter { stop ->
+
+                !markers.containsKey(stop.code)
+
+            }.forEach { stop ->
+
+                val markerOptions = stop.toGoogleMapsMarkerOptions()
+
+                val marker = googleMap.addMarker(markerOptions)
+
+                markers.put(stop.code, marker)
+
+            }
+
+        })
+
     }
 
 }
