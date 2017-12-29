@@ -23,7 +23,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.CameraPosition
 
 import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
@@ -42,7 +42,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
     @Inject
     lateinit var viewModel: StopsViewModel
 
-    private lateinit var googleMap: GoogleMap
+    private var googleMap: GoogleMap? = null
 
     private val markers = HashMap<Long, Marker>()
 
@@ -57,22 +57,34 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        googleMap?.let { viewModel.saveCameraPosition(it.cameraPosition) }
+
+    }
+
     // Map is ready
     override fun onMapReady(map: GoogleMap) {
 
         googleMap = map
 
-        val latLng = LatLng(40.4406, -79.9959)
+        map.isIndoorEnabled = false
+        map.isBuildingsEnabled = false
+        map.isTrafficEnabled = false
 
-        val update = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f)
+        map.uiSettings.isCompassEnabled = false
+        map.uiSettings.isMyLocationButtonEnabled = false
+        map.uiSettings.isMapToolbarEnabled = false
+        map.uiSettings.isZoomControlsEnabled = false
 
-        googleMap.moveCamera(update)
+        map.setInfoWindowAdapter(StopInfoWindowAdapter(this))
 
-        googleMap.setOnCameraIdleListener({
+        map.setOnCameraIdleListener({
 
-            val bounds = googleMap.projection.visibleRegion.latLngBounds
+            val bounds = map.projection.visibleRegion.latLngBounds
 
-            val zoom = googleMap.cameraPosition.zoom
+            val zoom = map.cameraPosition.zoom
 
             Log.d("StopsActivity", "View zoom is " + map.cameraPosition.zoom)
 
@@ -80,11 +92,27 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         })
 
+        map.setOnInfoWindowClickListener({ marker ->
+
+        })
+
+        viewModel.cameraPosition().observe(this, Observer<CameraPosition> {
+
+            it.let {
+
+                val cameraUpdate = CameraUpdateFactory.newCameraPosition(it)
+
+                map.moveCamera(cameraUpdate)
+
+            }
+
+        })
+
         viewModel.stops().observe(this, Observer<List<Stop>> { stops ->
 
             if (stops == null) {
                 markers.clear()
-                googleMap.clear()
+                map.clear()
                 return@Observer
             }
 
@@ -96,7 +124,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val markerOptions = stop.toGoogleMapsMarkerOptions()
 
-                val marker = googleMap.addMarker(markerOptions)
+                val marker = map.addMarker(markerOptions)
 
                 markers.put(stop.code, marker)
 
