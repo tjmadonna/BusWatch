@@ -20,11 +20,14 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.os.AsyncTask
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLngBounds
+import com.madonnaapps.buswatch.data.MapsRepository
 import com.madonnaapps.buswatch.data.StopsRepository
 import com.madonnaapps.buswatch.data.local.Stop
 
-internal class StopsViewModel constructor(val stopsRepository: StopsRepository) : ViewModel() {
+internal class StopsViewModel constructor(private val stopsRepository: StopsRepository,
+                                          private val mapsRepository: MapsRepository) : ViewModel() {
 
     companion object {
 
@@ -57,6 +60,23 @@ internal class StopsViewModel constructor(val stopsRepository: StopsRepository) 
 
         })
 
+    }
+
+    fun saveCameraPosition(cameraPosition: CameraPosition) {
+        mapsRepository.cameraPosition = cameraPosition
+    }
+
+    fun cameraPosition() : LiveData<CameraPosition> {
+
+        val position = MutableLiveData<CameraPosition>()
+
+        AsyncTask.execute {
+
+            position.postValue(mapsRepository.cameraPosition)
+
+        }
+
+        return position
     }
 
 }
