@@ -23,7 +23,7 @@ import android.os.AsyncTask
 import com.madonnaapps.buswatch.data.StopsRepository
 import com.madonnaapps.buswatch.data.parse.ParseResult
 
-internal class SplashViewModel constructor(val stopsRepository: StopsRepository) : ViewModel() {
+internal class SplashViewModel constructor(private val stopsRepository: StopsRepository) : ViewModel() {
 
     private companion object {
 
