@@ -19,7 +19,7 @@ package com.madonnaapps.buswatch.data.local
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 
-@Database(entities = arrayOf(Stop::class), version = 1)
+@Database(entities = [Stop::class], version = 1)
 internal abstract class BusWatchRoomDatabase : RoomDatabase() {
 
     // Stop dao instance
