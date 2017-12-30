@@ -35,15 +35,11 @@ class StopFileParserTest {
     @Before
     fun setUp() {
 
-        stopFileParser = StopFileParser()
-
         val appContext = InstrumentationRegistry.getTargetContext()
 
         val inputStream = appContext.resources.openRawResource(R.raw.stops)
 
-        stopFileParser.reader = InputStreamReader(inputStream)
-
-        stopFileParser.gson = Gson()
+        stopFileParser = StopFileParser(Gson(), InputStreamReader(inputStream))
 
     }
 
