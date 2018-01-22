@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2017 Tyler Madonna
+  ~ Copyright 2018 Tyler Madonna
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,9 +15,9 @@
   ~ limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">Bus Watch</string>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval" >
 
-    <string name="action_tap_for_transit_info">Tap for transit information</string>
-    <string name="title_activity_predictions">Predictions</string>
-</resources>
+    <solid android:color="@color/colorPrimary" />
+
+</shape>

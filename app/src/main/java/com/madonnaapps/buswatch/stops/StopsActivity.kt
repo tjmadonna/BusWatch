@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.data.local.Stop
+import com.madonnaapps.buswatch.predictions.PredictionsActivity
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -44,7 +45,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var googleMap: GoogleMap? = null
 
-    private val markers = HashMap<Long, Marker>()
+    private val markers = HashMap<Marker, Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -94,6 +95,12 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         map.setOnInfoWindowClickListener({ marker ->
 
+            val stopCode = markers[marker]!!
+
+            val intent = PredictionsActivity.createIntent(this, stopCode)
+
+            startActivity(intent)
+
         })
 
         viewModel.cameraPosition().observe(this, Observer<CameraPosition> {
@@ -118,7 +125,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             stops.filter { stop ->
 
-                !markers.containsKey(stop.code)
+                !markers.containsValue(stop.code)
 
             }.forEach { stop ->
 
@@ -126,7 +133,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val marker = map.addMarker(markerOptions)
 
-                markers.put(stop.code, marker)
+                markers.put(marker, stop.code)
 
             }
 

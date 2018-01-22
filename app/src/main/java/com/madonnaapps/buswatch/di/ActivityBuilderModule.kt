@@ -16,6 +16,8 @@
 
 package com.madonnaapps.buswatch.di
 
+import com.madonnaapps.buswatch.predictions.PredictionsActivity
+import com.madonnaapps.buswatch.predictions.PredictionsActivityModule
 import com.madonnaapps.buswatch.splash.SplashActivity
 import com.madonnaapps.buswatch.splash.SplashActivityModule
 import com.madonnaapps.buswatch.stops.StopsActivity
@@ -33,5 +35,9 @@ internal abstract class ActivityBuilderModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [StopsActivityModule::class])
     abstract fun bindStopsActivity() : StopsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [PredictionsActivityModule::class])
+    abstract fun bindPredictionsActivity() : PredictionsActivity
 
 }

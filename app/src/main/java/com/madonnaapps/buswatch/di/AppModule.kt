@@ -28,13 +28,14 @@ import com.madonnaapps.buswatch.data.local.BusWatchRoomDatabase
 import com.madonnaapps.buswatch.data.local.RoomDatabaseModule
 import com.madonnaapps.buswatch.data.local.StopDao
 import com.madonnaapps.buswatch.data.parse.ParseModule
+import com.madonnaapps.buswatch.data.remote.RetrofitModule
 import dagger.Module
 import dagger.Provides
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.Reader
 
-@Module(includes = [RoomDatabaseModule::class, ParseModule::class])
+@Module(includes = [RoomDatabaseModule::class, ParseModule::class, RetrofitModule::class])
 
 internal class AppModule {
 
@@ -54,6 +55,7 @@ internal class AppModule {
     @AppScope
     fun provideGson(): Gson {
         return GsonBuilder()
+                .setDateFormat("yyyyMMdd HH:mm")
                 .create()
     }
 
