@@ -17,23 +17,16 @@
 package com.madonnaapps.buswatch.di
 
 import android.app.Application
-import androidx.room.Room
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.madonnaapps.buswatch.R
-import com.madonnaapps.buswatch.data.local.BusWatchRoomDatabase
 import com.madonnaapps.buswatch.data.local.RoomDatabaseModule
-import com.madonnaapps.buswatch.data.local.StopDao
 import com.madonnaapps.buswatch.data.parse.ParseModule
 import com.madonnaapps.buswatch.data.remote.RetrofitModule
 import dagger.Module
 import dagger.Provides
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.io.Reader
 
 @Module(includes = [RoomDatabaseModule::class, ParseModule::class, RetrofitModule::class])
 

@@ -18,6 +18,7 @@ package com.madonnaapps.buswatch.data.local
 
 import androidx.room.Room
 import android.content.Context
+import com.madonnaapps.buswatch.cache.database.BusWatchRoomDatabase
 import com.madonnaapps.buswatch.di.AppScope
 import dagger.Module
 import dagger.Provides

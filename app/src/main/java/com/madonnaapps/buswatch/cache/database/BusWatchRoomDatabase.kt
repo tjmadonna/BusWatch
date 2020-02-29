@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.madonnaapps.buswatch.data.local
+package com.madonnaapps.buswatch.cache.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.madonnaapps.buswatch.data.local.Stop
+import com.madonnaapps.buswatch.data.local.StopDao
 
 @Database(entities = [Stop::class], version = 1)
 internal abstract class BusWatchRoomDatabase : RoomDatabase() {
