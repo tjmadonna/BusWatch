@@ -9,6 +9,7 @@ import io.reactivex.Single
 @Dao
 abstract class StopDao {
 
+    @Transaction
     @Query(
         "SELECT * FROM stops WHERE " +
                 "latitude <= :northBound AND latitude >= :southBound AND " +
@@ -21,6 +22,7 @@ abstract class StopDao {
         eastBound: Double
     ): Observable<List<StopWithFavoriteDbo>>
 
+    @Transaction
     @Query("SELECT * FROM stops WHERE stops.id = :id LIMIT 1")
     abstract fun getStopById(id: String): Single<StopWithFavoriteDbo>
 
