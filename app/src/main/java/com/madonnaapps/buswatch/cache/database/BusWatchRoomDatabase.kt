@@ -16,15 +16,61 @@
 
 package com.madonnaapps.buswatch.cache.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.madonnaapps.buswatch.data.local.Stop
-import com.madonnaapps.buswatch.data.local.StopDao
+import androidx.room.TypeConverters
+import com.madonnaapps.buswatch.cache.converter.RouteTypeConverter
+import com.madonnaapps.buswatch.cache.dao.LastLocationDao
+import com.madonnaapps.buswatch.cache.dao.StopDao
+import com.madonnaapps.buswatch.cache.dao.StopVersionDao
+import com.madonnaapps.buswatch.cache.model.FavoriteStopDbo
+import com.madonnaapps.buswatch.cache.model.LastLocationDbo
+import com.madonnaapps.buswatch.cache.model.StopDbo
+import com.madonnaapps.buswatch.cache.model.StopVersionDbo
 
-@Database(entities = [Stop::class], version = 1)
-internal abstract class BusWatchRoomDatabase : RoomDatabase() {
+@Database(
+    entities = [
+        StopDbo::class,
+        StopVersionDbo::class,
+        FavoriteStopDbo::class,
+        LastLocationDbo::class
+    ],
+    version = 2
+)
+// TODO: Handle database migration
+@TypeConverters(RouteTypeConverter::class)
+abstract class BusWatchRoomDatabase : RoomDatabase() {
 
-    // Stop dao instance
     abstract fun stopDao(): StopDao
 
+    abstract fun stopVersionDao(): StopVersionDao
+
+    abstract fun lastLocationDao(): LastLocationDao
+
+    companion object {
+
+        private const val DB_NAME = "bus-watch-database"
+
+        private var INSTANCE: BusWatchRoomDatabase? = null
+        private val lock = Any()
+
+        fun getInstance(context: Context): BusWatchRoomDatabase {
+            // Double-checked locking just in case called from other threads
+            if (INSTANCE == null) {
+                synchronized(lock) {
+                    if (INSTANCE == null) {
+                        INSTANCE = Room.databaseBuilder(
+                            context.applicationContext,
+                            BusWatchRoomDatabase::class.java, DB_NAME
+                        )
+                            .build()
+                    }
+                    return INSTANCE as BusWatchRoomDatabase
+                }
+            }
+            return INSTANCE as BusWatchRoomDatabase
+        }
+    }
 }
