@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package com.madonnaapps.buswatch.cache.database
+package com.madonnaapps.buswatch.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.madonnaapps.buswatch.cache.converter.RouteTypeConverter
-import com.madonnaapps.buswatch.cache.dao.LastLocationDao
-import com.madonnaapps.buswatch.cache.dao.StopDao
-import com.madonnaapps.buswatch.cache.dao.StopVersionDao
-import com.madonnaapps.buswatch.cache.model.FavoriteStopDbo
-import com.madonnaapps.buswatch.cache.model.LastLocationDbo
-import com.madonnaapps.buswatch.cache.model.StopDbo
-import com.madonnaapps.buswatch.cache.model.StopVersionDbo
+import com.madonnaapps.buswatch.local.converter.RouteTypeConverter
+import com.madonnaapps.buswatch.local.dao.LastLocationDao
+import com.madonnaapps.buswatch.local.dao.StopDao
+import com.madonnaapps.buswatch.local.dao.StopVersionDao
+import com.madonnaapps.buswatch.local.model.FavoriteStopDbo
+import com.madonnaapps.buswatch.local.model.LastLocationDbo
+import com.madonnaapps.buswatch.local.model.StopDbo
+import com.madonnaapps.buswatch.local.model.StopVersionDbo
 
 @Database(
     entities = [

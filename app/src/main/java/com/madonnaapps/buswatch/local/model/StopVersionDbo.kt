@@ -1,4 +1,4 @@
-package com.madonnaapps.buswatch.cache.model
+package com.madonnaapps.buswatch.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

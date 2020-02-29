@@ -1,21 +1,15 @@
-package com.madonnaapps.buswatch.cache.model
+package com.madonnaapps.buswatch.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "stops")
-data class StopDbo(
+@Entity(tableName = "last_location")
+data class LastLocationDbo(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    val id: String,
-
-    @ColumnInfo(name = "code")
-    val code: String,
-
-    @ColumnInfo(name = "title")
-    val title: String,
+    val id: Int = 1,
 
     @ColumnInfo(name = "latitude")
     val latitude: Double,
@@ -23,6 +17,7 @@ data class StopDbo(
     @ColumnInfo(name = "longitude")
     val longitude: Double,
 
-    @ColumnInfo(name = "routes")
-    val routes: List<String>
+    @ColumnInfo(name = "zoom")
+    val zoom: Float
+
 )

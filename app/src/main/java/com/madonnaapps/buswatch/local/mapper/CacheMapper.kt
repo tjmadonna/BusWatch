@@ -1,4 +1,4 @@
-package com.madonnaapps.buswatch.cache.mapper
+package com.madonnaapps.buswatch.local.mapper
 
 interface CacheMapper<CacheObject, DomainObject> {
 

@@ -1,6 +1,6 @@
-package com.madonnaapps.buswatch.cache.mapper
+package com.madonnaapps.buswatch.local.mapper
 
-import com.madonnaapps.buswatch.cache.model.LastLocationDbo
+import com.madonnaapps.buswatch.local.model.LastLocationDbo
 import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.LocationZoom
 import javax.inject.Inject

@@ -1,8 +1,8 @@
-package com.madonnaapps.buswatch.cache.datastore
+package com.madonnaapps.buswatch.local.datastore
 
-import com.madonnaapps.buswatch.cache.dao.LastLocationDao
-import com.madonnaapps.buswatch.cache.mapper.CacheMapper
-import com.madonnaapps.buswatch.cache.model.LastLocationDbo
+import com.madonnaapps.buswatch.local.dao.LastLocationDao
+import com.madonnaapps.buswatch.local.mapper.CacheMapper
+import com.madonnaapps.buswatch.local.model.LastLocationDbo
 import com.madonnaapps.buswatch.data.datastore.location.LocationLocalDataStore
 import com.madonnaapps.buswatch.domain.model.LocationZoom
 import io.reactivex.Completable

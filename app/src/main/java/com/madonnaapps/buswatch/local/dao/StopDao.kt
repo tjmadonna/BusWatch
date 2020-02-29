@@ -1,8 +1,8 @@
-package com.madonnaapps.buswatch.cache.dao
+package com.madonnaapps.buswatch.local.dao
 
 import androidx.room.*
-import com.madonnaapps.buswatch.cache.model.StopDbo
-import com.madonnaapps.buswatch.cache.model.StopWithFavoriteDbo
+import com.madonnaapps.buswatch.local.model.StopDbo
+import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import io.reactivex.Observable
 import io.reactivex.Single
 

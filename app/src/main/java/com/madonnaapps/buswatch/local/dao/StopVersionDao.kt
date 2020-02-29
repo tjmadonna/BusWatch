@@ -1,10 +1,10 @@
-package com.madonnaapps.buswatch.cache.dao
+package com.madonnaapps.buswatch.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.madonnaapps.buswatch.cache.model.StopVersionDbo
+import com.madonnaapps.buswatch.local.model.StopVersionDbo
 import io.reactivex.Completable
 import io.reactivex.Single
 

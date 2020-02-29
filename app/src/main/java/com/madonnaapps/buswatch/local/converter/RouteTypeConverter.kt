@@ -1,4 +1,4 @@
-package com.madonnaapps.buswatch.cache.converter
+package com.madonnaapps.buswatch.local.converter
 
 import androidx.room.TypeConverter
 
