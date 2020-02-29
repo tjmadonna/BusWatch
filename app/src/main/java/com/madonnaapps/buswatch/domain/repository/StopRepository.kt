@@ -14,4 +14,10 @@ interface StopRepository {
 
     fun refreshStops(): Completable
 
+    fun getFavoriteStops(): Observable<List<Stop>>
+
+    fun favoriteStop(stopId: String): Completable
+
+    fun unfavoriteStop(stopId: String): Completable
+
 }
