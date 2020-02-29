@@ -16,4 +16,10 @@ interface StopLocalDataStore {
 
     fun refreshStops(stops: List<Stop>, version: Int): Completable
 
+    fun getFavoriteStops(): Observable<List<Stop>>
+
+    fun favoriteStop(stopId: String): Completable
+
+    fun unfavoriteStop(stopId: String): Completable
+
 }
