@@ -9,6 +9,8 @@ import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import com.madonnaapps.buswatch.data.datastore.stop.StopLocalDataStore
 import com.madonnaapps.buswatch.domain.model.LocationBounds
 import com.madonnaapps.buswatch.domain.model.Stop
+import com.madonnaapps.buswatch.local.dao.FavoriteStopDao
+import com.madonnaapps.buswatch.local.model.FavoriteWithStopDbo
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -16,9 +18,11 @@ import javax.inject.Inject
 
 class StopLocalDataStoreImpl @Inject constructor(
     private val stopDao: StopDao,
+    private val favoriteStopDao: FavoriteStopDao,
     private val stopVersionDao: StopVersionDao,
     private val stopDboMapper: CacheMapper<StopDbo, Stop>,
-    private val stopWithFavoriteDboMapper: CacheMapper<StopWithFavoriteDbo, Stop>
+    private val stopWithFavoriteDboMapper: CacheMapper<StopWithFavoriteDbo, Stop>,
+    private val favoriteWithStopDboMapper: CacheMapper<FavoriteWithStopDbo, Stop>
 ) : StopLocalDataStore {
 
     override fun getStopsInLocationBounds(locationBounds: LocationBounds): Observable<List<Stop>> {
@@ -69,5 +73,18 @@ class StopLocalDataStoreImpl @Inject constructor(
 
             Completable.complete()
         }
+    }
+
+    override fun getFavoriteStops(): Observable<List<Stop>> {
+        return favoriteStopDao.getFavoriteStops()
+            .map { dboList -> dboList.map { favoriteWithStopDboMapper.mapFromCacheObject(it) } }
+    }
+
+    override fun favoriteStop(stopId: String): Completable {
+        return favoriteStopDao.favoriteStop(stopId, null)
+    }
+
+    override fun unfavoriteStop(stopId: String): Completable {
+        return unfavoriteStop(stopId)
     }
 }
