@@ -30,6 +30,8 @@ buildscript {
     ext.play_services_version = '17.0.0'
     ext.retrofit_version = '2.3.0'
     ext.room_version = '2.2.4'
+    ext.rx_android_version = '2.1.1'
+    ext.rx_kotlin_version = '2.4.0'
     ext.support_constraint_version = '1.0.2'
 
     // Testing

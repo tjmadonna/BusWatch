@@ -99,7 +99,7 @@ dependencies {
     // Room architecture components
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    androidTestImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
 
     // LiveData/ViewModel architecture components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -111,6 +111,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -127,5 +131,7 @@ dependencies {
     // Android unit test
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 
 }
