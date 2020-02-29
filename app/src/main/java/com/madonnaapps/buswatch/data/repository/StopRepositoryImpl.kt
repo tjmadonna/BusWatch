@@ -27,7 +27,7 @@ class StopRepositoryImpl @Inject constructor(
 
     override fun refreshStops(): Completable {
         return stopLocalDataStore.getStopVersion()
-            .map { stopDataStoreVersion -> stopFileVersion.value > stopDataStoreVersion }
+            .map { stopDataStoreVersion -> (stopFileVersion.value > stopDataStoreVersion) }
             .flatMapCompletable { needsRefreshed ->
                 when (needsRefreshed) {
                     true -> refreshStops(stopFileVersion.value)
@@ -43,4 +43,16 @@ class StopRepositoryImpl @Inject constructor(
                 newStopVersion
             )
         }
+
+    override fun getFavoriteStops(): Observable<List<Stop>> {
+        return stopLocalDataStore.getFavoriteStops()
+    }
+
+    override fun favoriteStop(stopId: String): Completable {
+        return stopLocalDataStore.favoriteStop(stopId)
+    }
+
+    override fun unfavoriteStop(stopId: String): Completable {
+        return stopLocalDataStore.unfavoriteStop(stopId)
+    }
 }
