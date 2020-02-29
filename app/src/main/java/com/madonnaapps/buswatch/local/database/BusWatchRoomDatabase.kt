@@ -22,6 +22,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.madonnaapps.buswatch.local.converter.RouteTypeConverter
+import com.madonnaapps.buswatch.local.dao.FavoriteStopDao
 import com.madonnaapps.buswatch.local.dao.LastLocationDao
 import com.madonnaapps.buswatch.local.dao.StopDao
 import com.madonnaapps.buswatch.local.dao.StopVersionDao
@@ -44,6 +45,8 @@ import com.madonnaapps.buswatch.local.model.StopVersionDbo
 abstract class BusWatchRoomDatabase : RoomDatabase() {
 
     abstract fun stopDao(): StopDao
+
+    abstract fun favoriteStopDap(): FavoriteStopDao
 
     abstract fun stopVersionDao(): StopVersionDao
 
