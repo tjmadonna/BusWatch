@@ -2,6 +2,7 @@ package com.madonnaapps.buswatch.local.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import com.madonnaapps.buswatch.local.model.FavoriteWithStopDbo
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -9,6 +10,7 @@ import io.reactivex.Observable
 @Dao
 interface FavoriteStopDao {
 
+    @Transaction
     @Query("SELECT * FROM favorite_stops")
     fun getFavoriteStops(): Observable<List<FavoriteWithStopDbo>>
 
