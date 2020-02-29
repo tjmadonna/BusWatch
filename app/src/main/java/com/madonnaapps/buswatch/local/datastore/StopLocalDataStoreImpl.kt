@@ -51,13 +51,14 @@ class StopLocalDataStoreImpl @Inject constructor(
             val upsertStops = mutableListOf<StopDbo>()
             val deleteStops = mutableListOf<StopDbo>()
 
-            stopDao.getAllStops().forEach { stop ->
-                refreshStopMap[stop.id]?.let { refreshStop ->
+            // Get all stops from database
+            stopDao.getAllStops().forEach { dbStop ->
+                refreshStopMap[dbStop.id]?.let { refreshStop ->
                     // The new list contains this stop...upsert it
                     upsertStops.add(refreshStop)
                 } ?: run {
                     // The new list does not contain this stop...delete it
-                    deleteStops.add(stop)
+                    deleteStops.add(dbStop)
                 }
             }
 
