@@ -28,7 +28,6 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.data.local.Stop
-import com.madonnaapps.buswatch.predictions.PredictionsActivity
 import javax.inject.Inject
 
 internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -95,9 +94,7 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val stopCode = markers[marker]!!
 
-            val intent = PredictionsActivity.createIntent(this, stopCode)
-
-            startActivity(intent)
+            // Navigate to predictions
 
         })
 

@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.madonnaapps.buswatch.data.MapsRepository
 import com.madonnaapps.buswatch.data.PredictionsRepository
 import com.madonnaapps.buswatch.data.StopsRepository
-import com.madonnaapps.buswatch.predictions.PredictionsViewModel
 import com.madonnaapps.buswatch.splash.SplashViewModel
 import com.madonnaapps.buswatch.stops.StopsViewModel
 import javax.inject.Inject
@@ -39,9 +38,6 @@ internal class BusWatchViewModelFactory @Inject constructor(private val stopsRep
 
         } else if (modelClass.isAssignableFrom(StopsViewModel::class.java)) {
             return StopsViewModel(stopsRepository, mapsRepository) as T
-
-        } else if (modelClass.isAssignableFrom(PredictionsViewModel::class.java)) {
-            return PredictionsViewModel(predictionsRepository) as T
 
         } else run { throw IllegalArgumentException("View model cannot be found") }
 

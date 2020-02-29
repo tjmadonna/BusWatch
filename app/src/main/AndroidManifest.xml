@@ -54,14 +54,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".stops.StopsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Stops" />
-        <activity
-            android:name=".predictions.PredictionsActivity"
-            android:label="@string/title_activity_predictions"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
