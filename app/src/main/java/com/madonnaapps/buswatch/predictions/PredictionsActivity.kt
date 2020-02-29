@@ -24,8 +24,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import com.madonnaapps.buswatch.R
-import com.madonnaapps.buswatch.stops.StopsActivity
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_predictions.*
 import kotlinx.android.synthetic.main.content_predictions.*
 
@@ -47,7 +45,6 @@ internal class PredictionsActivity : AppCompatActivity() {
     lateinit var viewModel: PredictionsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_predictions)
         setSupportActionBar(predictions_toolbar)
@@ -71,7 +68,7 @@ internal class PredictionsActivity : AppCompatActivity() {
 
         })
 
-        viewModel.loadData(intent.extras.getLong(EXTRA_STOP_CODE, -1))
+        viewModel.loadData(intent.extras!!.getLong(EXTRA_STOP_CODE, -1))
 
     }
 

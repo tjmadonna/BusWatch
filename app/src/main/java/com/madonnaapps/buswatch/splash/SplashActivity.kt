@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.madonnaapps.buswatch.stops.StopsActivity
-import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 internal class SplashActivity : AppCompatActivity() {
@@ -30,7 +29,6 @@ internal class SplashActivity : AppCompatActivity() {
     lateinit var viewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         viewModel.parseResult().observe(this, Observer { parseResult ->

@@ -34,6 +34,8 @@ internal class PredictionsAdapter : RecyclerView.Adapter<PredictionsItemViewHold
         return items?.count() ?: 0
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PredictionsItemViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.list_item_predictions, parent, false)
         val itemViewModel = PredictionsItemViewModel()

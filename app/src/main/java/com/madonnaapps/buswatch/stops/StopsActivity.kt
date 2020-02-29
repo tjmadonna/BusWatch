@@ -29,7 +29,6 @@ import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.data.local.Stop
 import com.madonnaapps.buswatch.predictions.PredictionsActivity
-import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -48,7 +47,6 @@ internal class StopsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val markers = HashMap<Marker, Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_stops)
 
