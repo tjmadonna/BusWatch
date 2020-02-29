@@ -16,8 +16,8 @@
 
 package com.madonnaapps.buswatch.data.local
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 
 @Database(entities = [Stop::class], version = 1)
 internal abstract class BusWatchRoomDatabase : RoomDatabase() {

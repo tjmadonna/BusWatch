@@ -16,12 +16,12 @@
 
 package com.madonnaapps.buswatch.predictions
 
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.stops.StopsActivity

@@ -28,7 +28,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // Used by Room, to test migrations
         javaCompileOptions {
@@ -89,21 +89,22 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Android support
-    implementation "com.android.support:appcompat-v7:$support_version"
-    implementation "com.android.support:design:$support_version"
-    implementation "com.android.support.constraint:constraint-layout:$support_constraint_version"
+    implementation "androidx.appcompat:appcompat:$app_compat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
     // Play services
     implementation "com.google.android.gms:play-services-maps:$play_services_version"
 
     // Room architecture components
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
-    androidTestImplementation "android.arch.persistence.room:testing:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
 
     // LiveData/ViewModel architecture components
-    implementation "android.arch.lifecycle:extensions:$live_data_version"
-    testImplementation "android.arch.core:core-testing:$live_data_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     // Dagger 2
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -119,10 +120,12 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
 
     // Unit test
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junit_version"
+
+    testImplementation "androidx.arch.core:core-testing:$arch_version"
 
     // Android unit test
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
 }

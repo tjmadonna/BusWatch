@@ -16,8 +16,8 @@
 
 package com.madonnaapps.buswatch.predictions
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import android.os.AsyncTask
 import android.util.Log
 import com.madonnaapps.buswatch.data.PredictionsRepository

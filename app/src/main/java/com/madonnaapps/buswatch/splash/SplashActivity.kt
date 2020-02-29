@@ -16,8 +16,8 @@
 
 package com.madonnaapps.buswatch.splash
 
-import android.arch.lifecycle.Observer
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.madonnaapps.buswatch.stops.StopsActivity

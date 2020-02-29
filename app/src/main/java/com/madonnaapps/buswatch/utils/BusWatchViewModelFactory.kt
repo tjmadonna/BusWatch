@@ -16,8 +16,8 @@
 
 package com.madonnaapps.buswatch.utils
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.madonnaapps.buswatch.data.MapsRepository
 import com.madonnaapps.buswatch.data.PredictionsRepository
 import com.madonnaapps.buswatch.data.StopsRepository

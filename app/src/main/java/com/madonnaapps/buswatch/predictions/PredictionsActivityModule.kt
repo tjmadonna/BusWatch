@@ -16,7 +16,7 @@
 
 package com.madonnaapps.buswatch.predictions
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.gesture.Prediction
 import android.util.Log
 import com.madonnaapps.buswatch.di.ActivityScope

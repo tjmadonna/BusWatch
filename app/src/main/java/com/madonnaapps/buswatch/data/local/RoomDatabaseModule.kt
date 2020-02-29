@@ -16,7 +16,7 @@
 
 package com.madonnaapps.buswatch.data.local
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.madonnaapps.buswatch.di.AppScope
 import dagger.Module

@@ -16,7 +16,7 @@
 
 package com.madonnaapps.buswatch.stops
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import com.madonnaapps.buswatch.di.ActivityScope
 import com.madonnaapps.buswatch.utils.BusWatchViewModelFactory
 import dagger.Module
