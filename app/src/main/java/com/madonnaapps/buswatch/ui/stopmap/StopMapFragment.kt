@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.domain.model.Location
@@ -13,8 +15,9 @@ import com.madonnaapps.buswatch.domain.model.LocationBounds
 import com.madonnaapps.buswatch.domain.model.LocationZoom
 import com.madonnaapps.buswatch.ui.common.extension.*
 import com.madonnaapps.buswatch.ui.stopmap.adapter.StopInfoWindowAdapter
-import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.*
-import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.*
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.MoveLocationStopMapIntent
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationStopMapState
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationWithStopsStopMapState
 import javax.inject.Inject
 
 class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {

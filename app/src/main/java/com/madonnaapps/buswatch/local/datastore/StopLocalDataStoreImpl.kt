@@ -1,16 +1,16 @@
 package com.madonnaapps.buswatch.local.datastore
 
-import com.madonnaapps.buswatch.local.dao.StopDao
-import com.madonnaapps.buswatch.local.dao.StopVersionDao
-import com.madonnaapps.buswatch.local.mapper.CacheMapper
-import com.madonnaapps.buswatch.local.model.StopDbo
-import com.madonnaapps.buswatch.local.model.StopVersionDbo
-import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import com.madonnaapps.buswatch.data.datastore.stop.StopLocalDataStore
 import com.madonnaapps.buswatch.domain.model.LocationBounds
 import com.madonnaapps.buswatch.domain.model.Stop
 import com.madonnaapps.buswatch.local.dao.FavoriteStopDao
+import com.madonnaapps.buswatch.local.dao.StopDao
+import com.madonnaapps.buswatch.local.dao.StopVersionDao
+import com.madonnaapps.buswatch.local.mapper.CacheMapper
 import com.madonnaapps.buswatch.local.model.FavoriteWithStopDbo
+import com.madonnaapps.buswatch.local.model.StopDbo
+import com.madonnaapps.buswatch.local.model.StopVersionDbo
+import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

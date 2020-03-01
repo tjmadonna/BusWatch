@@ -1,8 +1,8 @@
 package com.madonnaapps.buswatch.local.mapper
 
-import com.madonnaapps.buswatch.local.model.StopDbo
 import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.Stop
+import com.madonnaapps.buswatch.local.model.StopDbo
 import javax.inject.Inject
 
 class StopDboMapper @Inject constructor() : CacheMapper<StopDbo, Stop> {

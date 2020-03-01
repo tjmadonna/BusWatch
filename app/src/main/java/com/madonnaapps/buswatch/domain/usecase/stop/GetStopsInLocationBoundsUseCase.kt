@@ -6,7 +6,6 @@ import com.madonnaapps.buswatch.domain.model.Stop
 import com.madonnaapps.buswatch.domain.repository.StopRepository
 import com.madonnaapps.buswatch.domain.usecase.base.ObservableUseCase
 import io.reactivex.Observable
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class GetStopsInLocationBoundsUseCase @Inject constructor(

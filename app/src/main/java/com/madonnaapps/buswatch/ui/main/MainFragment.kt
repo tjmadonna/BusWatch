@@ -1,8 +1,6 @@
 package com.madonnaapps.buswatch.ui.main
 
 import android.os.Bundle
-import android.view.View
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.ui.favorites.FavoritesFragment

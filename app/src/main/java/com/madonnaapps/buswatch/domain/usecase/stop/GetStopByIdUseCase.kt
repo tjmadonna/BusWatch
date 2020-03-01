@@ -5,7 +5,6 @@ import com.madonnaapps.buswatch.domain.model.Stop
 import com.madonnaapps.buswatch.domain.repository.StopRepository
 import com.madonnaapps.buswatch.domain.usecase.base.SingleUseCase
 import io.reactivex.Single
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class GetStopByIdUseCase @Inject constructor(

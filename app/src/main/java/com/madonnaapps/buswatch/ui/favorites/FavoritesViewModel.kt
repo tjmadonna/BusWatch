@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.madonnaapps.buswatch.domain.model.Stop
 import com.madonnaapps.buswatch.domain.usecase.stop.GetFavoriteStopsUseCase
 import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState
-import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.*
+import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.DataFavoritesState
+import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.EmptyDataFavoritesState
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 

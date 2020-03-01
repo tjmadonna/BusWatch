@@ -4,7 +4,6 @@ import com.madonnaapps.buswatch.domain.executor.PostExecutionThread
 import com.madonnaapps.buswatch.domain.repository.StopRepository
 import com.madonnaapps.buswatch.domain.usecase.base.CompletableUseCase
 import io.reactivex.Completable
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class FavoriteStopUseCase @Inject constructor(

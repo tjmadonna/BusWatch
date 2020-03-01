@@ -10,9 +10,10 @@ import com.madonnaapps.buswatch.domain.usecase.location.GetLastLocationUseCase
 import com.madonnaapps.buswatch.domain.usecase.location.SaveLastLocationUseCase
 import com.madonnaapps.buswatch.domain.usecase.stop.GetStopsInLocationBoundsUseCase
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent
-import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.*
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.MoveLocationStopMapIntent
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState
-import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.*
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationStopMapState
+import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationWithStopsStopMapState
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver

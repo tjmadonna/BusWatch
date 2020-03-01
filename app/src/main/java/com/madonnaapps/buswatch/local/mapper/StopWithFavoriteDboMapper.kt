@@ -1,9 +1,8 @@
 package com.madonnaapps.buswatch.local.mapper
 
-import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.Stop
-import java.lang.UnsupportedOperationException
+import com.madonnaapps.buswatch.local.model.StopWithFavoriteDbo
 import javax.inject.Inject
 
 class StopWithFavoriteDboMapper @Inject constructor() : CacheMapper<StopWithFavoriteDbo, Stop> {

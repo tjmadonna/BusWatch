@@ -2,9 +2,6 @@ package com.madonnaapps.buswatch.di.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.Exception
-import java.lang.IllegalStateException
-import java.lang.RuntimeException
 import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton

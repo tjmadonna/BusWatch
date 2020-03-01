@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.ui.common.extension.applicationComponent
 import com.madonnaapps.buswatch.ui.favorites.adapter.FavoritesAdapter
-import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.*
+import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.DataFavoritesState
+import com.madonnaapps.buswatch.ui.favorites.contract.FavoritesState.EmptyDataFavoritesState
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import javax.inject.Inject
 

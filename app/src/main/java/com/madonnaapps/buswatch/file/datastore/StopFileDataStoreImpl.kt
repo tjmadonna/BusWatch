@@ -13,7 +13,6 @@ import okio.Okio
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class StopFileDataStoreImpl @Inject constructor(

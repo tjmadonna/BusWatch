@@ -5,7 +5,6 @@ import com.madonnaapps.buswatch.domain.model.LocationZoom
 import com.madonnaapps.buswatch.domain.repository.LocationRepository
 import com.madonnaapps.buswatch.domain.usecase.base.CompletableUseCase
 import io.reactivex.Completable
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class SaveLastLocationUseCase @Inject constructor(
