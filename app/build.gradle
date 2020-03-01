@@ -116,14 +116,10 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     // Moshi
     implementation "com.squareup.moshi:moshi:$moshi_version"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
-
-    //Gson
-    implementation "com.google.code.gson:gson:$gson_version"
 
     // Unit test
     testImplementation "junit:junit:$junit_version"
