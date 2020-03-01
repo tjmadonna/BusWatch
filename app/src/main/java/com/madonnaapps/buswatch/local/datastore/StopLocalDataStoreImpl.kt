@@ -56,22 +56,28 @@ class StopLocalDataStoreImpl @Inject constructor(
             val deleteStops = mutableListOf<StopDbo>()
 
             // Get all stops from database
-            stopDao.getAllStops().forEach { dbStop ->
-                refreshStopMap[dbStop.id]?.let { refreshStop ->
-                    // The new list contains this stop...upsert it
-                    upsertStops.add(refreshStop)
-                } ?: run {
-                    // The new list does not contain this stop...delete it
-                    deleteStops.add(dbStop)
+            val dbStops = stopDao.getAllStops()
+
+            if (dbStops.isNotEmpty()) {
+                // Stops exist in the database
+                stopDao.getAllStops().forEach { dbStop ->
+                    refreshStopMap[dbStop.id]?.let { refreshStop ->
+                        // The new list contains this stop...upsert it
+                        upsertStops.add(refreshStop)
+                    } ?: run {
+                        // The new list does not contain this stop...delete it
+                        deleteStops.add(dbStop)
+                    }
                 }
+            } else {
+                // No stops in the database. Upsert all new stops
+                upsertStops.addAll(refreshStopMap.values)
             }
 
             stopDao.refreshStops(upsertStops, deleteStops)
 
             val versionDbo = StopVersionDbo(version = version)
-            stopVersionDao.insertStopVersion(versionDbo)
-
-            Completable.complete()
+            return@defer stopVersionDao.insertStopVersion(versionDbo)
         }
     }
 
