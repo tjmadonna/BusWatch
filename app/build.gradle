@@ -52,6 +52,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'TRUE_TIME_API_KEY', keystoreProperties['TrueTimeApiKey']
         it.buildConfigField 'String', 'TRUE_TIME_API_BASE_URL', keystoreProperties['TrueTimeApiBaseUrl']
+        it.buildConfigField 'String', 'TRUE_TIME_API_GET_PREDICTIONS_PATH', keystoreProperties['TrueTimeApiGetPredictionsPath']
     }
 
     buildTypes {
