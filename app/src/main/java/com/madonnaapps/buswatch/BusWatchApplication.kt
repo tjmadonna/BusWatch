@@ -17,10 +17,16 @@
 package com.madonnaapps.buswatch
 
 import android.app.Application
+import com.madonnaapps.buswatch.di.component.ApplicationComponent
+import com.madonnaapps.buswatch.di.component.DaggerApplicationComponent
 
 class BusWatchApplication : Application() {
 
+    lateinit var applicationComponent: ApplicationComponent
+        private set
+
     override fun onCreate() {
         super.onCreate()
+        applicationComponent = DaggerApplicationComponent.factory().create(this)
     }
 }
