@@ -29,7 +29,7 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
         differ.submitList(stops, completeCallback)
     }
 
-    // RecipeListAdapter methods
+    // FavoritesAdapter methods
 
     override fun getItemCount(): Int {
         return differ.currentList.size
