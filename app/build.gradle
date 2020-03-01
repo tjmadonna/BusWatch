@@ -42,6 +42,11 @@ android {
             androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
         }
 
+        // Java 8
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
 
     // Import api keys from keystore.properties file
