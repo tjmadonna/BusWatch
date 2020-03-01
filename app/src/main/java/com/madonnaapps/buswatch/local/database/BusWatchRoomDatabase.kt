@@ -26,6 +26,7 @@ import com.madonnaapps.buswatch.local.dao.FavoriteStopDao
 import com.madonnaapps.buswatch.local.dao.LastLocationDao
 import com.madonnaapps.buswatch.local.dao.StopDao
 import com.madonnaapps.buswatch.local.dao.StopVersionDao
+import com.madonnaapps.buswatch.local.migration.BusWatchDatabaseMigration
 import com.madonnaapps.buswatch.local.model.FavoriteStopDbo
 import com.madonnaapps.buswatch.local.model.LastLocationDbo
 import com.madonnaapps.buswatch.local.model.StopDbo
@@ -38,7 +39,7 @@ import com.madonnaapps.buswatch.local.model.StopVersionDbo
         FavoriteStopDbo::class,
         LastLocationDbo::class
     ],
-    version = 2
+    version = 3
 )
 // TODO: Handle database migration
 @TypeConverters(RouteTypeConverter::class)
@@ -68,6 +69,8 @@ abstract class BusWatchRoomDatabase : RoomDatabase() {
                             context.applicationContext,
                             BusWatchRoomDatabase::class.java, DB_NAME
                         )
+                            .addMigrations(BusWatchDatabaseMigration.MIGRATION_1_2)
+                            .addMigrations(BusWatchDatabaseMigration.MIGRATION_2_3)
                             .build()
                     }
                     return INSTANCE as BusWatchRoomDatabase
