@@ -17,6 +17,11 @@
 <resources>
     <string name="app_name">Bus Watch</string>
 
+    <string name="title_stop_map">Stops</string>
+    <string name="title_favorites">Favorites</string>
+
     <string name="action_tap_for_transit_info">Tap for transit information</string>
     <string name="title_activity_predictions">Predictions</string>
+
+    <string name="no_favorites_found">No Favorite Stops Found</string>
 </resources>
