@@ -10,6 +10,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import io.reactivex.Single
 import okio.Okio
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
 import java.lang.IllegalStateException
@@ -22,9 +23,7 @@ class StopFileDataStoreImpl @Inject constructor(
 ) : StopFileDataStore {
 
     companion object {
-
         private const val FILE_NAME = "stops.json"
-
     }
 
     private val jsonAdapter: JsonAdapter<DeserializedStopsResult> by lazy {
@@ -37,7 +36,7 @@ class StopFileDataStoreImpl @Inject constructor(
         }
     }
 
-    @Throws(IOException::class, IllegalStateException::class)
+    @Throws(IOException::class, FileNotFoundException::class, IllegalStateException::class)
     private fun getStopsFromFile(): List<Stop> {
 
         var inputStream: InputStream? = null
@@ -53,6 +52,8 @@ class StopFileDataStoreImpl @Inject constructor(
             return stops.mapNotNull { stop -> mapper.mapFromFileObject(stop) }
 
         } catch (e: IOException) {
+            throw e
+        } catch (e: FileNotFoundException) {
             throw e
         } catch (e: IllegalStateException) {
             throw e
