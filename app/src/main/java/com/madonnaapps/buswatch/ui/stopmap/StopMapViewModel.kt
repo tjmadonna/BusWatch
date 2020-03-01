@@ -53,7 +53,7 @@ class StopMapViewModel @Inject constructor(
 
     private fun handleMoveLocationStopMapIntent(intent: MoveLocationStopMapIntent) {
         getStopsInLocationBoundsUseCase.clear()
-        if (intent.locationZoom.zoom > DEFAULT_ZOOM) {
+        if (intent.locationZoom.zoom >= DEFAULT_ZOOM) {
             saveLastLocationUseCase.execute(
                 SaveLastLocationSubscriber(),
                 SaveLastLocationUseCase.Params(intent.locationZoom)
