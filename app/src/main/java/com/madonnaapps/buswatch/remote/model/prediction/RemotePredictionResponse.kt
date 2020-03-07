@@ -7,6 +7,6 @@ import com.squareup.moshi.JsonClass
 data class RemotePredictionResponse(
 
     @Json(name = "bustime-response")
-    val result: RemotePredictionResult?
+    val result: RemotePredictionResult? = null
 
 )

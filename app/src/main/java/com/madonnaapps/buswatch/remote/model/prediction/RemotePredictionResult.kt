@@ -7,9 +7,9 @@ import com.squareup.moshi.JsonClass
 data class RemotePredictionResult(
 
     @Json(name = "prd")
-    val predictions: List<RemotePrediction>?,
+    val predictions: List<RemotePrediction>? = null,
 
     @Json(name = "error")
-    val error: List<RemotePredictionError>?
+    val error: List<RemotePredictionError>? = null
 
 )

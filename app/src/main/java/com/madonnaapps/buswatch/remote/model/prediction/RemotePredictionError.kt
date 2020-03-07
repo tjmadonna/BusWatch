@@ -7,6 +7,6 @@ import com.squareup.moshi.JsonClass
 data class RemotePredictionError(
 
     @Json(name = "msg")
-    val message: String?
+    val message: String? = null
 
 )

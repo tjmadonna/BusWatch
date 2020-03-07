@@ -7,18 +7,18 @@ import com.squareup.moshi.JsonClass
 data class RemotePrediction(
 
     @Json(name = "vid")
-    val vehicleId: String?,
+    val vehicleId: String? = null,
 
     @Json(name = "prdtm")
-    val arrivalTime: Long?,
+    val arrivalTime: String? = null,
 
     @Json(name = "rt")
-    val route: String?,
+    val route: String? = null,
 
     @Json(name = "des")
-    val destination: String?,
+    val destination: String? = null,
 
     @Json(name = "rtdir")
-    val direction: String?
+    val direction: String? = null
 
 )
