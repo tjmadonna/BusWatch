@@ -7,14 +7,21 @@ import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.domain.usecase.stop.FavoriteStopUseCase
 import com.madonnaapps.buswatch.domain.usecase.stop.RefreshStopsUseCase
 import com.madonnaapps.buswatch.ui.common.extension.applicationComponent
+import com.madonnaapps.buswatch.ui.main.navigation.NavigationCoordinator
+import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription
+import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription.*
+import com.madonnaapps.buswatch.ui.predictions.PredictionsFragment
 import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationCoordinator {
 
     companion object {
         const val TAG = "MainActivity"
+
+        // Fragments
         private const val MAIN_FRAG_TAG = "main_frag"
+        private const val PREDICTIONS_FRAG_TAG = "predictions_frag"
     }
 
     @Inject
@@ -32,14 +39,34 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.frag_container_main, MainFragment.newInstance(), MAIN_FRAG_TAG)
                 .commit()
             refreshStopsUseCase.execute(RefreshStopsSubscriber())
-//            favoriteStopsUseCase.execute(FavoriteStopSubscriber(), FavoriteStopUseCase.Params("E01960"))
-//            favoriteStopsUseCase.execute(FavoriteStopSubscriber(), FavoriteStopUseCase.Params("E02810"))
         }
     }
 
     override fun onDestroy() {
         refreshStopsUseCase.dispose()
         super.onDestroy()
+    }
+
+    // NavigationCoordinator
+
+    override fun navigate(description: NavigationDescription) {
+        when (description) {
+            is MainFragmentNavigationDescription -> {
+            }
+            is PredictionsFragmentNavigationDescription ->
+                navigationToPredictionsFragment(description)
+        }
+    }
+
+    private fun navigationToPredictionsFragment(description: PredictionsFragmentNavigationDescription) {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.frag_container_main,
+                PredictionsFragment.newInstance(description.stopId),
+                PREDICTIONS_FRAG_TAG
+            )
+            .addToBackStack("main")
+            .commit()
     }
 
     private inner class RefreshStopsSubscriber : DisposableCompletableObserver() {
@@ -50,16 +77,6 @@ class MainActivity : AppCompatActivity() {
 
         override fun onError(e: Throwable) {
             Log.e(TAG, e.localizedMessage, e)
-        }
-    }
-
-    private inner class FavoriteStopSubscriber : DisposableCompletableObserver() {
-        override fun onComplete() {
-
-        }
-
-        override fun onError(e: Throwable) {
-
         }
     }
 }
