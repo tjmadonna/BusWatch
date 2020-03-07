@@ -26,6 +26,11 @@ abstract class SingleUseCase<T, in Params> constructor(
         disposables.add(disposable)
     }
 
+    fun clear() {
+        if (!disposables.isDisposed)
+            disposables.clear()
+    }
+
     fun dispose() {
         if (!disposables.isDisposed)
             disposables.dispose()

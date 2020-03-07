@@ -27,7 +27,8 @@ abstract class ObservableUseCase<T, in Params> constructor(
     }
 
     fun clear() {
-        disposables.clear()
+        if (!disposables.isDisposed)
+            disposables.clear()
     }
 
     fun dispose() {
