@@ -12,6 +12,7 @@ import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription
 import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription.*
 import com.madonnaapps.buswatch.ui.predictions.PredictionsFragment
 import io.reactivex.observers.DisposableCompletableObserver
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationCoordinator {
@@ -34,17 +35,28 @@ class MainActivity : AppCompatActivity(), NavigationCoordinator {
         applicationComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupToolbar(savedInstanceState)
+        setupFragments(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        refreshStopsUseCase.dispose()
+        super.onDestroy()
+    }
+
+    // Setup functions
+
+    private fun setupToolbar(savedInstanceState: Bundle?) {
+        setSupportActionBar(toolbar_main)
+    }
+
+    private fun setupFragments(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.frag_container_main, MainFragment.newInstance(), MAIN_FRAG_TAG)
                 .commit()
             refreshStopsUseCase.execute(RefreshStopsSubscriber())
         }
-    }
-
-    override fun onDestroy() {
-        refreshStopsUseCase.dispose()
-        super.onDestroy()
     }
 
     // NavigationCoordinator

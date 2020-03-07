@@ -17,8 +17,8 @@
     <com.madonnaapps.buswatch.ui.common.widgets.CircleTextView
         android:id="@+id/text_favorites_item_icon"
         style="@style/TextAppearance.ListItemIcon"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:padding="2dp"
         app:circleColor="@color/colorPrimary"
