@@ -42,6 +42,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         setupObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.title = activity?.getString(R.string.title_favorites)
+    }
+
     // Setup Functions
 
     private fun setupRecyclerView() {

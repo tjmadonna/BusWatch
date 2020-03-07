@@ -2,7 +2,6 @@ package com.madonnaapps.buswatch.ui.stopmap
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
+import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.LocationBounds
 import com.madonnaapps.buswatch.domain.model.LocationZoom
@@ -93,7 +93,7 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
         }
 
         map?.setOnInfoWindowClickListener { marker ->
-            Log.d("StopMapFragment", "=====${marker.tag as String}")
+            val stopId = marker.tag as String
         }
     }
 
@@ -104,6 +104,11 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
                 is SetLocationWithStopsStopMapState -> renderSetLocationWithStopsStopMapState(state)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.title = activity?.getString(R.string.title_stop_map)
     }
 
     // Intent Functions
@@ -142,6 +147,7 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
             state.stops.forEach { stop ->
                 if (!markers.containsKey(stop.id)) {
                     val markerOptions = MarkerOptions(stop.location, stop.title)
+                        .snippet(stop.routes.joinToString(separator = ", "))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                     val marker = map.addMarker(markerOptions)
                     marker.tag = stop.id
