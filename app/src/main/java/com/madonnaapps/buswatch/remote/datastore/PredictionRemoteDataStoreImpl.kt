@@ -23,6 +23,7 @@ class PredictionRemoteDataStoreImpl @Inject constructor(
                     predictionMapper.mapFromRemoteObject(remotePrediction)
                 }
             }
+            .map { it.sortedBy { prediction -> prediction.arrivalTime  } }
     }
 
     @Throws(IllegalStateException::class, TrueTimeApiServiceException::class)
