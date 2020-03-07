@@ -14,6 +14,7 @@ class PredictionRepositoryImpl @Inject constructor(
 
     override fun getPredictionsForStopId(stopId: String): Single<List<Prediction>> {
         return stopLocalDataStore.getStopById(stopId)
+            .firstOrError()
             .flatMap { stop -> predictionRemoteDataStore.getPredictionsForStopCode(stop.code) }
     }
 }
