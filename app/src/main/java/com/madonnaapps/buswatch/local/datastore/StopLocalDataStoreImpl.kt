@@ -91,6 +91,6 @@ class StopLocalDataStoreImpl @Inject constructor(
     }
 
     override fun unfavoriteStop(stopId: String): Completable {
-        return unfavoriteStop(stopId)
+        return favoriteStopDao.unfavoriteStop(stopId)
     }
 }
