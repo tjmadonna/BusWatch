@@ -34,7 +34,7 @@ class StopLocalDataStoreImpl @Inject constructor(
         ).map { dboList -> dboList.map { stopWithFavoriteDboMapper.mapFromCacheObject(it) } }
     }
 
-    override fun getStopById(id: String): Single<Stop> {
+    override fun getStopById(id: String): Observable<Stop> {
         return stopDao.getStopById(id)
             .map { dbo -> stopWithFavoriteDboMapper.mapFromCacheObject(dbo) }
     }

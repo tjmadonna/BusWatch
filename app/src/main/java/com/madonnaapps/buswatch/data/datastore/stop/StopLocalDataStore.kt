@@ -10,7 +10,7 @@ interface StopLocalDataStore {
 
     fun getStopsInLocationBounds(locationBounds: LocationBounds): Observable<List<Stop>>
 
-    fun getStopById(id: String): Single<Stop>
+    fun getStopById(id: String): Observable<Stop>
 
     fun getStopVersion(): Single<Int>
 
