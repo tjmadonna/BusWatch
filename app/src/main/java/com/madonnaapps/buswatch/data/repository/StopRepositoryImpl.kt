@@ -8,7 +8,6 @@ import com.madonnaapps.buswatch.domain.model.Stop
 import com.madonnaapps.buswatch.domain.repository.StopRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
-import io.reactivex.Single
 import javax.inject.Inject
 
 class StopRepositoryImpl @Inject constructor(
@@ -21,7 +20,7 @@ class StopRepositoryImpl @Inject constructor(
         return stopLocalDataStore.getStopsInLocationBounds(locationBounds)
     }
 
-    override fun getStopById(id: String): Single<Stop> {
+    override fun getStopById(id: String): Observable<Stop> {
         return stopLocalDataStore.getStopById(id)
     }
 
