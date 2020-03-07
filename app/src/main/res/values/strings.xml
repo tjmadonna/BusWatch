@@ -20,8 +20,13 @@
     <string name="title_stop_map">Stops</string>
     <string name="title_favorites">Favorites</string>
 
-    <string name="action_tap_for_transit_info">Tap for transit information</string>
-    <string name="title_activity_predictions">Predictions</string>
-
     <string name="no_favorites_found">No Favorite Stops Found</string>
+    <string name="no_predictions_found">No Bus Predictions Found</string>
+
+    <string name="favorite_stop">Favorite Stop</string>
+    <string name="unfavorite_stop">Unfavorite Stop</string>
+
+    <string name="arrival_time_now">Arriving Now</string>
+    <string name="arrival_time_one">Arriving in %d minute</string>
+    <string name="arrival_time_many">Arriving in %d minutes</string>
 </resources>

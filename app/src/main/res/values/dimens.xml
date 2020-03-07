@@ -16,4 +16,5 @@
 
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="list_item_icon_text">36sp</dimen>
 </resources>

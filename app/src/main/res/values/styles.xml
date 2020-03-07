@@ -47,6 +47,7 @@
 
     <style name="TextAppearance.ListItemIcon" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/list_item_icon_text</item>
     </style>
 
     <style name="TextAppearance.NavigationItem.Active" parent="TextAppearance.MaterialComponents.Body1">

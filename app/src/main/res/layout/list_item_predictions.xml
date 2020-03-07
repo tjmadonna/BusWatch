@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingStart="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="8dp">
+
+    <com.madonnaapps.buswatch.ui.common.widgets.CircleTextView
+        android:id="@+id/text_predictions_item_route"
+        style="@style/TextAppearance.ListItemIcon"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:padding="2dp"
+        app:circleColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="V,1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="71D" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/text_predictions_item_route"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_predictions_item_destination"
+            style="@style/TextAppearance.ListItemPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_favorites_item_icon"
+            tools:text="Downtown" />
+
+        <TextView
+            android:id="@+id/text_predictions_item_time"
+            style="@style/TextAppearance.ListItemSecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_favorites_item_icon"
+            app:layout_constraintTop_toBottomOf="@id/guideline"
+            tools:text="Arriving in 10 minutes" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
