@@ -148,8 +148,14 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
                 return
             }
 
+            val markersToDelete = markers.keys
+
             state.stops.forEach { stop ->
-                if (!markers.containsKey(stop.id)) {
+                if (markers.containsKey(stop.id)) {
+                    // Marker already exists on map, delete from markersToDelete
+                    markersToDelete.remove(stop.id)
+                } else {
+                    // Marker doesn't exist, create one and add to markers
                     val markerOptions = MarkerOptions(stop.location, stop.title)
                         .snippet(stop.routes.joinToString(separator = ", "))
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
@@ -157,6 +163,12 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
                     marker.tag = stop.id
                     markers[stop.id] = marker
                 }
+            }
+
+            // Markers still left in markersToDelete should not be in the new state, delete them
+            markersToDelete.forEach { stopId ->
+                val marker = markers.remove(stopId)
+                marker?.remove() // Remove marker from google map
             }
         }
     }
