@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.Marker
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.LocationBounds
@@ -16,6 +14,7 @@ import com.madonnaapps.buswatch.domain.model.LocationZoom
 import com.madonnaapps.buswatch.ui.common.extension.*
 import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription
 import com.madonnaapps.buswatch.ui.stopmap.adapter.StopInfoWindowAdapter
+import com.madonnaapps.buswatch.ui.stopmap.adapter.StopMapMarkerAdapter
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.MoveLocationStopMapIntent
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationStopMapState
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapState.SetLocationWithStopsStopMapState
@@ -37,7 +36,7 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
 
     private var googleMap: GoogleMap? = null
 
-    private val markers = HashMap<String, Marker>()
+    private var markerAdapter: StopMapMarkerAdapter? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,46 +57,52 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
 
     // Setup Functions
 
-    private fun setupMapView(map: GoogleMap?) {
-        googleMap = map
-        map?.isIndoorEnabled = false
-        map?.isBuildingsEnabled = false
-        map?.isTrafficEnabled = false
-        map?.uiSettings?.isCompassEnabled = false
-        map?.uiSettings?.isMyLocationButtonEnabled = false
-        map?.uiSettings?.isMapToolbarEnabled = false
-        map?.uiSettings?.isZoomControlsEnabled = false
+    private fun setupMapView(optionalMap: GoogleMap?) {
+        optionalMap?.let { map ->
+            googleMap = map
+            markerAdapter = StopMapMarkerAdapter(map)
 
-        map?.setInfoWindowAdapter(StopInfoWindowAdapter(requireContext()))
+            map.isIndoorEnabled = false
+            map.isBuildingsEnabled = false
+            map.isTrafficEnabled = false
+            map.uiSettings?.isCompassEnabled = false
+            map.uiSettings?.isMyLocationButtonEnabled = false
+            map.uiSettings?.isMapToolbarEnabled = false
+            map.uiSettings?.isZoomControlsEnabled = false
 
-        map?.setOnCameraIdleListener {
-            googleMap?.let { map ->
-                if (map.atNullPoint) {
-                    return@setOnCameraIdleListener
+            map.setInfoWindowAdapter(StopInfoWindowAdapter(requireContext()))
+
+            map.setOnCameraIdleListener {
+                googleMap?.let { map ->
+                    if (map.atNullPoint) {
+                        return@setOnCameraIdleListener
+                    }
+
+                    val locationZoom = LocationZoom(
+                        Location(map.latitude, map.longitude),
+                        map.cameraPosition.zoom
+                    )
+
+                    val locationBounds = LocationBounds(
+                        map.northBound,
+                        map.southBound,
+                        map.westBound,
+                        map.eastBound
+                    )
+
+                    val intent = MoveLocationStopMapIntent(locationZoom, locationBounds)
+                    viewModel.handleIntent(intent)
                 }
-
-                val locationZoom = LocationZoom(
-                    Location(map.latitude, map.longitude),
-                    map.cameraPosition.zoom
-                )
-
-                val locationBounds = LocationBounds(
-                    map.northBound,
-                    map.southBound,
-                    map.westBound,
-                    map.eastBound
-                )
-
-                val intent = MoveLocationStopMapIntent(locationZoom, locationBounds)
-                viewModel.handleIntent(intent)
             }
-        }
 
-        map?.setOnInfoWindowClickListener { marker ->
-            val stopId = marker.tag as String
-            navigationCoordinator.navigate(
-                NavigationDescription.PredictionsFragmentNavigationDescription(stopId)
-            )
+            map.setOnInfoWindowClickListener { marker ->
+                val stopId = marker.tag as String
+                navigationCoordinator.navigate(
+                    NavigationDescription.PredictionsFragmentNavigationDescription(stopId)
+                )
+            }
+        } ?: run {
+            // TODO: Display error snackbar if something went wrong
         }
     }
 
@@ -142,34 +147,7 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
                 map.moveCamera(cameraPosition)
             }
 
-            if (state.stops.isEmpty()) {
-                map.clear()
-                markers.clear()
-                return
-            }
-
-            val markersToDelete = markers.keys
-
-            state.stops.forEach { stop ->
-                if (markers.containsKey(stop.id)) {
-                    // Marker already exists on map, delete from markersToDelete
-                    markersToDelete.remove(stop.id)
-                } else {
-                    // Marker doesn't exist, create one and add to markers
-                    val markerOptions = MarkerOptions(stop.location, stop.title)
-                        .snippet(stop.routes.joinToString(separator = ", "))
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    val marker = map.addMarker(markerOptions)
-                    marker.tag = stop.id
-                    markers[stop.id] = marker
-                }
-            }
-
-            // Markers still left in markersToDelete should not be in the new state, delete them
-            markersToDelete.forEach { stopId ->
-                val marker = markers.remove(stopId)
-                marker?.remove() // Remove marker from google map
-            }
+            markerAdapter?.submitStops(state.stops)
         }
     }
 }
