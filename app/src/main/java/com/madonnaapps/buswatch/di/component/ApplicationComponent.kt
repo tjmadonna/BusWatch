@@ -4,7 +4,7 @@ import android.app.Application
 import com.madonnaapps.buswatch.di.module.*
 import com.madonnaapps.buswatch.ui.favorites.FavoritesFragment
 import com.madonnaapps.buswatch.ui.main.MainActivity
-import com.madonnaapps.buswatch.ui.predictions.PredictionsFragment
+import com.madonnaapps.buswatch.ui.predictions.PredictionsActivity
 import com.madonnaapps.buswatch.ui.stopmap.StopMapFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -37,6 +37,6 @@ interface ApplicationComponent {
 
     fun inject(favoritesFragment: FavoritesFragment)
 
-    fun inject(predictionsFragment: PredictionsFragment)
+    fun inject(predictionsActivity: PredictionsActivity)
 
 }

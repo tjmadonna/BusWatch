@@ -1,36 +1,34 @@
 package com.madonnaapps.buswatch.ui.predictions
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.madonnaapps.buswatch.R
 import com.madonnaapps.buswatch.ui.common.extension.applicationComponent
 import com.madonnaapps.buswatch.ui.predictions.adapter.PredictionsAdapter
-import com.madonnaapps.buswatch.ui.predictions.contract.PredictionsState.*
+import com.madonnaapps.buswatch.ui.predictions.contract.PredictionsState
 import com.madonnaapps.buswatch.ui.predictions.contract.StopIntent
 import com.madonnaapps.buswatch.ui.predictions.contract.StopState
-import kotlinx.android.synthetic.main.fragment_predictions.*
+import kotlinx.android.synthetic.main.activity_predictions.*
 import javax.inject.Inject
 
-class PredictionsFragment : Fragment(R.layout.fragment_predictions) {
+class PredictionsActivity: AppCompatActivity() {
 
     companion object {
-        fun newInstance(stopId: String): PredictionsFragment {
-            val fragment = PredictionsFragment()
-            val bundle = Bundle()
-            bundle.putString(STOP_ID_ARG_KEY, stopId)
-            fragment.arguments = bundle
-            return fragment
+        fun createIntent(context: Context, stopId: String): Intent {
+            val intent = Intent(context, PredictionsActivity::class.java)
+            intent.putExtra(STOP_ID_EXTRA_KEY, stopId)
+            return intent
         }
 
-        private const val STOP_ID_ARG_KEY = "stop_id_arg"
+        private const val STOP_ID_EXTRA_KEY = "stop_id_extra"
     }
 
     @Inject
@@ -45,37 +43,35 @@ class PredictionsFragment : Fragment(R.layout.fragment_predictions) {
 
     private val adapter = PredictionsAdapter()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
         applicationComponent.inject(this)
-        viewModel.injectStopId(arguments?.getString(STOP_ID_ARG_KEY))
-        setHasOptionsMenu(true)
-    }
+        viewModel.injectStopId(intent.extras?.getString(STOP_ID_EXTRA_KEY))
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         setupRecyclerView()
         setupObservers()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.predictions, menu)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.predictions, menu)
+        return true
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         super.onPrepareOptionsMenu(menu)
-        val menuItem = menu.findItem(R.id.action_favorite)
+        val menuItem = menu?.findItem(R.id.action_favorite)
         when (isStopFavorite) {
             true -> {
-                menuItem.setIcon(R.drawable.ic_star_black_24dp)
-                menuItem.setTitle(R.string.unfavorite_stop)
+                menuItem?.setIcon(R.drawable.ic_star_black_24dp)
+                menuItem?.setTitle(R.string.unfavorite_stop)
             }
             false -> {
-                menuItem.setIcon(R.drawable.ic_star_border_black_24dp)
-                menuItem.setTitle(R.string.favorite_stop)
+                menuItem?.setIcon(R.drawable.ic_star_border_black_24dp)
+                menuItem?.setTitle(R.string.favorite_stop)
             }
         }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -92,20 +88,20 @@ class PredictionsFragment : Fragment(R.layout.fragment_predictions) {
 
     private fun setupRecyclerView() {
         recycler_predictions.adapter = adapter
-        recycler_predictions.layoutManager = LinearLayoutManager(requireContext())
+        recycler_predictions.layoutManager = LinearLayoutManager(this)
         recycler_predictions.setHasFixedSize(true)
     }
 
     private fun setupObservers() {
-        viewModel.stopState.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.stopState.observe(this, Observer { state ->
             renderStopState(state)
         })
 
-        viewModel.predictionsState.observe(viewLifecycleOwner, Observer { state ->
+        viewModel.predictionsState.observe(this, Observer { state ->
             when (state) {
-                is LoadingPredictionsState -> renderLoadingPredictionsState()
-                is DataPredictionsState -> renderDataPredictionsState(state)
-                is ErrorPredictionsState -> renderErrorPredictionsState()
+                is PredictionsState.LoadingPredictionsState -> renderLoadingPredictionsState()
+                is PredictionsState.DataPredictionsState -> renderDataPredictionsState(state)
+                is PredictionsState.ErrorPredictionsState -> renderErrorPredictionsState()
             }
         })
     }
@@ -113,9 +109,9 @@ class PredictionsFragment : Fragment(R.layout.fragment_predictions) {
     // Render Functions
 
     private fun renderStopState(state: StopState) {
-        activity?.title = state.title
+        title = state.title
         isStopFavorite = state.isFavorite
-        activity?.invalidateOptionsMenu()
+        invalidateOptionsMenu()
     }
 
     private fun renderLoadingPredictionsState() {
@@ -127,7 +123,7 @@ class PredictionsFragment : Fragment(R.layout.fragment_predictions) {
         adapter.submitPredictions(emptyList(), null)
     }
 
-    private fun renderDataPredictionsState(state: DataPredictionsState) {
+    private fun renderDataPredictionsState(state: PredictionsState.DataPredictionsState) {
         if (recycler_predictions.visibility == View.GONE) {
             recycler_predictions.visibility = View.VISIBLE
             progress_predictions.visibility = View.GONE
