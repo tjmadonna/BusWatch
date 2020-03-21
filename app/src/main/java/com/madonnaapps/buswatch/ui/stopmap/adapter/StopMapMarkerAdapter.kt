@@ -17,7 +17,7 @@ class StopMapMarkerAdapter(private val googleMap: GoogleMap) {
             return
         }
 
-        val markersToDelete = markers.keys
+        val markersToDelete = HashSet(markers.keys)
 
         stops.forEach { stop ->
             if (markers.containsKey(stop.id)) {
