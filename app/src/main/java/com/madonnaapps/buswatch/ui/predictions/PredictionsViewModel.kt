@@ -98,6 +98,8 @@ class PredictionsViewModel @Inject constructor(
         timerDisposable?.dispose()
         getPredictionsForStopIdUseCase.dispose()
         getStopByIdUseCase.dispose()
+        favoriteStopUseCase.dispose()
+        unfavoriteStopUseCase.dispose()
         super.onCleared()
     }
 
