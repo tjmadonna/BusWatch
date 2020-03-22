@@ -46,9 +46,10 @@ class PredictionsActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         applicationComponent.inject(this)
-        viewModel.injectStopId(intent.extras?.getString(STOP_ID_EXTRA_KEY))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_predictions)
+
+        viewModel.injectStopId(intent.extras?.getString(STOP_ID_EXTRA_KEY))
 
         setupToolbar()
         setupRecyclerView()
