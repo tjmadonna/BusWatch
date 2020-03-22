@@ -39,6 +39,11 @@ class StopLocalDataStoreImpl @Inject constructor(
             .map { dbo -> stopWithFavoriteDboMapper.mapFromCacheObject(dbo) }
     }
 
+    override fun getStopByIdSingle(id: String): Single<Stop> {
+        return stopDao.getStopByIdSingle(id)
+            .map { dbo -> stopWithFavoriteDboMapper.mapFromCacheObject(dbo) }
+    }
+
     override fun getStopVersion(): Single<Int> {
         return stopVersionDao.getStopVersion()
             .map { dbo -> dbo.version }

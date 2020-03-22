@@ -12,6 +12,8 @@ interface StopLocalDataStore {
 
     fun getStopById(id: String): Observable<Stop>
 
+    fun getStopByIdSingle(id: String): Single<Stop>
+
     fun getStopVersion(): Single<Int>
 
     fun refreshStops(stops: List<Stop>, version: Int): Completable

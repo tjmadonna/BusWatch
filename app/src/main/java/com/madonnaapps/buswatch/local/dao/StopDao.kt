@@ -26,6 +26,10 @@ abstract class StopDao {
     @Query("SELECT * FROM stops WHERE stops.id = :id LIMIT 1")
     abstract fun getStopById(id: String): Observable<StopWithFavoriteDbo>
 
+    @Transaction
+    @Query("SELECT * FROM stops WHERE stops.id = :id LIMIT 1")
+    abstract fun getStopByIdSingle(id: String): Single<StopWithFavoriteDbo>
+
     @Query("SELECT * FROM stops")
     abstract fun getAllStops(): List<StopDbo>
 
