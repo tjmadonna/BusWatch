@@ -12,7 +12,7 @@ import com.madonnaapps.buswatch.domain.model.Location
 import com.madonnaapps.buswatch.domain.model.LocationBounds
 import com.madonnaapps.buswatch.domain.model.LocationZoom
 import com.madonnaapps.buswatch.ui.common.extension.*
-import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription
+import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription.PredictionsNavigationDescription
 import com.madonnaapps.buswatch.ui.stopmap.adapter.StopInfoWindowAdapter
 import com.madonnaapps.buswatch.ui.stopmap.adapter.StopMapMarkerAdapter
 import com.madonnaapps.buswatch.ui.stopmap.contract.StopMapIntent.MoveLocationStopMapIntent
@@ -97,9 +97,7 @@ class StopMapFragment : SupportMapFragment(), OnMapReadyCallback {
 
             map.setOnInfoWindowClickListener { marker ->
                 val stopId = marker.tag as String
-                navigationCoordinator.navigate(
-                    NavigationDescription.PredictionsFragmentNavigationDescription(stopId)
-                )
+                navigationCoordinator.navigate(PredictionsNavigationDescription(stopId))
             }
         } ?: run {
             // TODO: Display error snackbar if something went wrong
