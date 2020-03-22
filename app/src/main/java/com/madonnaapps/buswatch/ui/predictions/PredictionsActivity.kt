@@ -17,6 +17,7 @@ import com.madonnaapps.buswatch.ui.predictions.contract.PredictionsState
 import com.madonnaapps.buswatch.ui.predictions.contract.StopIntent
 import com.madonnaapps.buswatch.ui.predictions.contract.StopState
 import kotlinx.android.synthetic.main.activity_predictions.*
+import kotlinx.android.synthetic.main.content_toolbar.*
 import javax.inject.Inject
 
 class PredictionsActivity: AppCompatActivity() {
@@ -47,8 +48,9 @@ class PredictionsActivity: AppCompatActivity() {
         applicationComponent.inject(this)
         viewModel.injectStopId(intent.extras?.getString(STOP_ID_EXTRA_KEY))
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_predictions)
 
+        setupToolbar()
         setupRecyclerView()
         setupObservers()
     }
@@ -85,6 +87,12 @@ class PredictionsActivity: AppCompatActivity() {
     }
 
     // Setup Functions
+
+    // Setup functions
+
+    private fun setupToolbar() {
+        setSupportActionBar(toolbar)
+    }
 
     private fun setupRecyclerView() {
         recycler_predictions.adapter = adapter
