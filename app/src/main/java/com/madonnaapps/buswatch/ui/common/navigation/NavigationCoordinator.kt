@@ -1,4 +1,4 @@
-package com.madonnaapps.buswatch.ui.main.navigation
+package com.madonnaapps.buswatch.ui.common.navigation
 
 interface NavigationCoordinator {
 

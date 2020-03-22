@@ -10,9 +10,9 @@ import com.madonnaapps.buswatch.domain.usecase.stop.RefreshStopsUseCase
 import com.madonnaapps.buswatch.ui.common.extension.applicationComponent
 import com.madonnaapps.buswatch.ui.favorites.FavoritesFragment
 import com.madonnaapps.buswatch.ui.main.adapter.MainFragmentPagerAdapter
-import com.madonnaapps.buswatch.ui.main.navigation.NavigationCoordinator
-import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription
-import com.madonnaapps.buswatch.ui.main.navigation.NavigationDescription.*
+import com.madonnaapps.buswatch.ui.common.navigation.NavigationCoordinator
+import com.madonnaapps.buswatch.ui.common.navigation.NavigationDescription
+import com.madonnaapps.buswatch.ui.common.navigation.NavigationDescription.*
 import com.madonnaapps.buswatch.ui.predictions.PredictionsActivity
 import com.madonnaapps.buswatch.ui.stopmap.StopMapFragment
 import io.reactivex.observers.DisposableCompletableObserver
